@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  medicacao-anvisa-network:
+
+services:
+  front:
+    build:
+      context: .
+      dockerfile: ./docker-config/Dockerfile
+    command: sh -c "cd /front-medicamento-anvisa/front-medicamento-anvisa && \
+      npm install && npm run dev -- --host"
+    container_name: front-medicamento-anvisa
+    networks:
+      - medicacao-anvisa-network
+    volumes:
+      - .:/front-medicamento-anvisa
+    ports:
+      - "5173:5173"
+    restart: always
